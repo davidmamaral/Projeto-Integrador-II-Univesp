@@ -12,15 +12,27 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
-import django_heroku
+#Esta é a biblioteca para hospedar no render
+from dotenv import load_dotenv
+
+
+#Esta é a biblioteca para hospedar no heroku
+#import django_heroku
 #django_heroku.settings(locals(), staticfiles=False)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 #BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+"""
+#<==========Bloco para o render==============>
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+load_dotenv(BASE_DIR / '.venv')
+#----para o render termina na linha acima
+#<===========================================>
+"""
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -50,6 +62,13 @@ INSTALLED_APPS = [
     #serve para melhorar o layout dor forms
     #'crispy_forms',
 ]
+"""
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # ...
+]
+"""
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -152,9 +171,23 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ['0.0.0.0',
-                 'coracaoemacao.herokuapp.com',
-                'http://127.0.0.1:8000/',
-                 ]
+#ALLOWED_HOSTS = ['0.0.0.0',
+ #                'coracaoemacao.herokuapp.com',
+  #              'http://127.0.0.1:8000/',
+   #              ]
 CORS_ORIGIN_ALLOW_ALL = True
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
+
+# core/settings.py
+'''
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.getenv('django-insecure-xxhad+ou2lx*o8jdk#bf746(t$y_c=fevb38$^_k=00cd_@^&+')
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
+
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS')#.split(' ')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+'''

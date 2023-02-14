@@ -27,7 +27,7 @@ def doacoes(request):
     return render(request, "doacoes.html")
 
 
-def pagInscritos(request):
+def conta(request):
     return render(request, 'account.html')
 
 
