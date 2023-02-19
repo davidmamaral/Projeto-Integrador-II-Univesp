@@ -1,8 +1,8 @@
 
 databases:
-  - name: coracaoemacao.onrender.com
-    databaseName: coracaoemacao.onrender.com
-    user: coracaoemacao.onrender.com
+  - name: dyinyvgt
+    databaseName: django.db.backends.postgresql_psycopg2
+    user: dyinyvgt
 
 services:
   - type: web
