@@ -1,7 +1,7 @@
 
 databases:
   - name: dyinyvgt
-    databaseName: django.db.backends.postgresql_psycopg2
+    databaseName: sqlite3
     user: dyinyvgt
 
 services:
